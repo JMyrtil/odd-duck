@@ -34,9 +34,9 @@ section {
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row-start: 2;
-  grid-row-end: 4;
+  grid-row-end: 5;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
@@ -63,4 +63,8 @@ section + div {
   height: max-content;
   font-size: .8rem;
   margin: 1rem;
+}
+
+li {
+  color: black;
 }
