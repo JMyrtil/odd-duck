@@ -130,7 +130,7 @@ function renderChart() {
     data: {
       labels: productName,
       datasets: [{
-        label: '# of Votes',
+        label: '# of Likes',
         data: productLikes,
         borderWidth: 1
       },
