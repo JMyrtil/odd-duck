@@ -41,7 +41,7 @@ function selectRandomItem() {
 }
 
 function renderItem() {
-  
+
   while (itemArr.length < 6) {
     ranItem = selectRandomItem();
 
@@ -54,7 +54,7 @@ function renderItem() {
   let item2 = itemArr.shift();
   let item3 = itemArr.shift();
 
-  
+
 
   pic1.src = allProduct[item1].src;
   pic2.src = allProduct[item2].src;
@@ -72,14 +72,14 @@ function renderItem() {
 
 }
 
-function selectResults() {
-  let results = document.querySelector('ul')
-  for (let i = 0; i < allProduct.length; i++) {
-    let li = document.createElement('li');
-    li.textContent = `${allProduct[i].name} had ${allProduct[i].views} views and ${allProduct[i].likes} likes.`;
-    results.appendChild(li)
-  }
-}
+// function selectResults() {
+// let results = document.querySelector('ul')
+// for (let i = 0; i < allProduct.length; i++) {
+//   let li = document.createElement('li');
+//   li.textContent = `${allProduct[i].name} had ${allProduct[i].views} views and ${allProduct[i].likes} likes.`;
+//   results.appendChild(li)
+// }
+// }
 
 
 function allowIDClick(event) {
@@ -94,15 +94,61 @@ function allowIDClick(event) {
     renderItem()
   } else {
     myContainer.removeEventListener('click', allowIDClick);
-    myButton.addEventListener('click', selectResults);
-  }
-
+    // myButton.addEventListener('click', selectResults);
+    // console.log(allProduct);
+    renderChart();
+  };
 
 }
 
 
 
 renderItem();
-console.log(renderItem());
 
 myContainer.addEventListener('click', allowIDClick)
+
+
+function renderChart() {
+
+  let productLikes = [];
+  let productName = [];
+  let productViews = [];
+
+  for (let i = 0; i < allProduct.length; i++) {
+    productLikes.push(allProduct[i].likes);
+    productName.push(allProduct[i].name);
+    productViews.push(allProduct[i].views);
+  };
+  // console.log(productLikes);
+  // console.log(productName);
+
+
+  const ctx = document.getElementById('myChart');
+
+  let config = {
+    type: 'bar',
+    data: {
+      labels: productName,
+      datasets: [{
+        label: '# of Votes',
+        data: productLikes,
+        borderWidth: 1
+      },
+      {
+        label: '# of Votes',
+        data: productViews,
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  };
+
+
+  new Chart(ctx, config);
+}
