@@ -12,7 +12,7 @@ let pic2 = document.querySelector('section img:nth-child(2)');
 let numberOfmatchups = 0;
 let numberOfmatchupsAllowed = 25;
 
-function Product (name, fileExtension = 'jpg') {
+function Product(name, fileExtension = 'jpg') {
   this.name = name;
   this.src = `img/${name}.${fileExtension}`;
   this.views = 0;
@@ -34,11 +34,17 @@ function selectRandomItem() {
 }
 
 function renderItem() {
-  let item1 = selectRandomItem();
-  let item2 = selectRandomItem();
-  while (item1 === item2) {
-    item2 = selectRandomItem();
+  let itemArr = [];
+  while (itemArr.length < 25) {
+    ranItem = selectRandomItem();
+
+    if (!itemArr.includes(ranItem)) {
+      itemArr.push(ranItem)
+    }
   }
+
+  let item1 = itemArr[0];
+  let item2 = itemArr[1];
 
   console.log(item1);
 
@@ -48,8 +54,6 @@ function renderItem() {
   pic2.alt = allProduct[item2].name;
   allProduct[item1].views++
   allProduct[item2].views++
-
-
 }
 
 function selectResults() {
