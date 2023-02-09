@@ -17,10 +17,40 @@ let numberOfmatchupsAllowed = 25;
 function Product(name, fileExtension = 'jpg') {
   this.name = name;
   this.src = `img/${name}.${fileExtension}`;
-  this.views = 0;
-  this.likes = 0;
-
+  this.views = [];
+  this.likes = [];
+  this.report = function() {
+    console.log(`This is product ${this.name} with ${this.views} views and ${this.like} likes.`);
+  }
 }
+
+function storeProduct(itemToStore) {
+  let stringifiedProduct = JSON.stringify(itemToStore);
+  localStorage.setItem('Product', stringifiedProduct);
+}
+
+function getProduct() {
+  let storedItem = localStorage.getItem('Product');
+  if (storedItem) {
+    let parsedItem = JSON.parse(storedItem);
+    return parsedItem
+  }
+}
+
+let myProduct = new Product(allProduct.length);
+myProduct.report();
+
+storeProduct(myProduct);
+
+let itemS = getProduct();
+let itemB = new Product(
+  itemS.name,
+  itemS.views,
+  itemS.likes
+);   
+
+itemB.report();
+
 
 let boot = new Product('boots');
 let eatery = new Product('Eatery');
