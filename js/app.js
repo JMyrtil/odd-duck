@@ -14,43 +14,6 @@ let itemArr = [];
 let numberOfmatchups = 0;
 let numberOfmatchupsAllowed = 25;
 
-function Product(name, fileExtension = 'jpg') {
-  this.name = name;
-  this.src = `img/${name}.${fileExtension}`;
-  this.views = [];
-  this.likes = [];
-  this.report = function() {
-    console.log(`This is product ${this.name} with ${this.views} views and ${this.like} likes.`);
-  }
-}
-
-function storeProduct(itemToStore) {
-  let stringifiedProduct = JSON.stringify(itemToStore);
-  localStorage.setItem('Product', stringifiedProduct);
-}
-
-function getProduct() {
-  let storedItem = localStorage.getItem('Product');
-  if (storedItem) {
-    let parsedItem = JSON.parse(storedItem);
-    return parsedItem
-  }
-}
-
-let myProduct = new Product(allProduct.length);
-myProduct.report();
-
-storeProduct(myProduct);
-
-let itemS = getProduct();
-let itemB = new Product(
-  itemS.name,
-  itemS.views,
-  itemS.likes
-);   
-
-itemB.report();
-
 
 let boot = new Product('boots');
 let eatery = new Product('Eatery');
@@ -65,6 +28,49 @@ let spoon = new Product('spoon');
 let thicc = new Product('thicc');
 
 allProduct = [boot, eatery, water, thicc, spoon, shoe, pot, mug, dvd, desk, broom];
+
+function Product(name, fileExtension = 'jpg') {
+  this.name = name;
+  this.src = `img/${name}.${fileExtension}`;
+  this.views = [];
+  this.likes = [];
+   this.report = function() {
+    console.log();
+    // (`This is product ${this.name} with ${this.views} views and ${this.like} likes.`);
+  }
+}
+
+function storeProduct(itemToStore) {
+  let stringifiedProduct = JSON.stringify(itemToStore);
+  localStorage.setItem('Product', stringifiedProduct);
+}
+
+function getProduct() {
+  let storedItem = localStorage.getItem('Product');
+  if (storedItem) {
+    let parsedItem = JSON.parse(storedItem);
+    console.log(parsedItem);
+    return parsedItem
+  }
+}
+
+
+for (let i = 0; i < allProduct.length; i++) {
+  allProduct[i].report();
+};
+
+getProduct();
+
+
+// let itemS = getProduct();
+// let itemB = new Product(
+//   allProduct
+// );   
+
+// itemB.report();
+
+
+
 
 function selectRandomItem() {
   return Math.floor(Math.random() * allProduct.length);
@@ -127,6 +133,7 @@ function allowIDClick(event) {
     // myButton.addEventListener('click', selectResults);
     // console.log(allProduct);
     renderChart();
+    storeProduct(allProduct);
   };
 
 }
@@ -182,3 +189,5 @@ function renderChart() {
 
   new Chart(ctx, config);
 }
+
+
